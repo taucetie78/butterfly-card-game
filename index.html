@@ -11,7 +11,7 @@
         /* Base styles for the body */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Dark background */
+            background-color: #996633; /* Dark background */
             color: #e2e8f0; /* Light text */
             display: flex;
             justify-content: center;
@@ -43,7 +43,7 @@
             /* UPDATED: Cards are larger for better image visibility */
             width: 250px; 
             height: 350px;
-            background-color: #4a5568;
+            background-color: #996633;
             border: 2px solid #a0aec0;
             border-radius: 0.75rem;
             display: flex;
@@ -64,13 +64,13 @@
         .card-container:hover {
             transform: translateY(-8px) scale(1.02); /* Slight scale on hover */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 0 20px #63b3ed; /* More intense glow */
-            border-color: #63b3ed;
+            border-color: #d2a679;
         }
 
         .card-container.selected {
-            border-color: #63b3ed;
+            border-color: #d2a679;
             transform: translateY(-12px) scale(1.08); /* More pronounced scale when selected */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 0 30px #4299e1; /* Stronger glow */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 0 30px #ac7339; /* Stronger glow */
         }
 
         /* -- IMAGE CARD STYLES -- */
@@ -142,8 +142,8 @@
 
         /* Opponent card styling */
         .card-container.opponent-card {
-            background-color: #5a67d8;
-            border-color: #8da4f7;
+            background-color: #8da4f7;
+            border-color: #bf8040;
             transform: none !important;
             cursor: default;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
@@ -154,7 +154,7 @@
             font-weight: 700;
             text-align: center;
             font-size: 0.9rem; /* Slightly larger for emphasis */
-            color: #e2e8f0;
+            color: ##ffd7b3;
             line-height: 1.2;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
         }
@@ -177,7 +177,7 @@
         .card-body {
             font-size: 0.75rem; /* Adjusted for readability on larger card */
             text-align: center;
-            color: #cbd5e0;
+            color: #b35900;
             line-height: 1.4; /* Increased line height */
             overflow-y: auto; /* Enable vertical scrolling */
             -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
@@ -202,7 +202,7 @@
 
         .card-footer {
             font-size: 0.85rem; /* Adjusted for readability on larger card */
-            color: #cbd5e0;
+            color: #b35900;
             font-weight: bold;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
