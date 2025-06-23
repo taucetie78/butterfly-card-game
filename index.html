@@ -232,11 +232,6 @@
             z-index: 50; /* Ensure played card is above others */
         }
 
-        /* Facedown card styling (removed, opponent cards will be visible) */
-        .facedown-card {
-            display: none !important; /* Hide facedown cards */
-        }
-
         /* Status bar general style */
         .status-bar {
             height: 25px; /* Slightly taller */
@@ -521,10 +516,7 @@
                 height: 200px; /* Adjusted for mobile */
                 padding: 0.4rem;
             }
-            .facedown-card {
-                width: 140px;
-                height: 200px;
-            }
+            /* Removed facedown-card rule for mobile as well */
             .card-header {
                 font-size: 0.75rem;
             }
@@ -750,7 +742,7 @@
             { id: 'p13', name: 'Sisterhood Bond', cost: 10, effects: [{ target: 'player', stat: 'suspicion', value: -15 }, { target: 'player', stat: 'supplies', value: 10 }], art: 'sisterhoodbond.png' },
             { id: 'p14', name: 'Underground Press', cost: 5, effects: [{ target: 'player', stat: 'supplies', value: 25 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'undergroundpress.png' },
             { id: 'p15', name: 'Act of Defiance', cost: 20, effects: [{ target: 'opponent', stat: 'strength', value: -30 }, { target: 'player', stat: 'suspicion', value: 10 }], art: 'actofdefiance.png' },
-            { id: 'p16', name: 'Secret Meeting', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: -15 }], drawExtra: 1, art: 'secretmeeting.png' },
+            { id: 'p16', name: 'Secret Meeting', cost: 0, effects: [{ target: 'player', stat: 'suppicion', value: -15 }], drawExtra: 1, art: 'secretmeeting.png' },
             { id: 'p18', name: 'The Fourth Butterfly', cost: 25, effects: [{ target: 'player', stat: 'suspicion', value: -50 }, { target: 'player', stat: 'supplies', value: -25 }], art: 'thefourthbutterfly.png' },
             
             // Opponent Cards
