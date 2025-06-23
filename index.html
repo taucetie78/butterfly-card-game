@@ -818,7 +818,7 @@
                 this.deck = [...allCards.filter(card => card.id.includes(`_${this.cardType}`))];
                 this.shuffleDeck();
             }
-
+            
 chooseCard(playerChar) {
                 let bestCard = null;
                 let bestScore = -Infinity;
@@ -861,6 +861,7 @@ chooseCard(playerChar) {
                 }
                 return bestCard;
             }
+
         // --- Game Flow Functions ---
         function startGame() {
             player = new Player();
