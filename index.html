@@ -888,7 +888,8 @@
             document.getElementById('startScreen').classList.add('hidden');
             gameScreen.classList.remove('hidden');
 
-            // Play background music
+            // Play background music and set volume
+            backgroundMusic.volume = 0.5; // Set volume to 50%
             backgroundMusic.play().catch(e => console.log("Music play failed:", e));
 
             startTurn();
@@ -1070,13 +1071,6 @@
             cardImage.alt = card.name;
             cardImage.className = 'card-image';
             
-            // The existing `innerHTML` for card parts is removed to ensure the image fully fills the card.
-            // cardElement.innerHTML = `
-            //     <div class="card-header"></div>
-            //     <div class="card-art"></div>
-            //     <div class="card-body"></div>
-            //     <div class="card-footer"></div>
-            // `;
             cardElement.appendChild(cardImage);
 
 
