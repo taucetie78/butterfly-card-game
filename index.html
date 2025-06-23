@@ -40,8 +40,9 @@
 
         /* Card container base style */
         .card-container {
-            width: 160px;
-            height: 200px;
+            /* Cards are now bigger */
+            width: 180px; 
+            height: 250px; 
             background-color: #4a5568;
             border: 2px solid #a0aec0;
             border-radius: 0.75rem;
@@ -212,7 +213,7 @@
             justify-content: center;
             gap: 1rem; /* Increased gap between cards */
             flex-wrap: wrap;
-            min-height: 240px; /* Adjusted to fit larger cards and animations */
+            min-height: 280px; /* Adjusted to fit larger cards and animations */
             align-items: flex-end; /* Align cards to the bottom of the hand area */
             position: relative; /* For z-index and animations */
         }
@@ -231,27 +232,9 @@
             z-index: 50; /* Ensure played card is above others */
         }
 
-        /* Facedown card styling */
+        /* Facedown card styling (removed, opponent cards will be visible) */
         .facedown-card {
-            background-color: #5a67d8;
-            border: 2px solid #8da4f7;
-            border-radius: 0.75rem;
-            width: 160px;
-            height: 200px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            flex-shrink: 0;
-            position: relative;
-            background-image: linear-gradient(45deg, #5a67d8, #4299e1); /* Gradient for facedown */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            color: rgba(255,255,255,0.3);
-            font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
-        .facedown-card::before {
-            content: '?'; /* Simple question mark on facedown cards */
+            display: none !important; /* Hide facedown cards */
         }
 
         /* Status bar general style */
@@ -415,8 +398,8 @@
         }
 
         .player-info .avatar, .opponent-info .avatar {
-            width: 40px;
-            height: 40px;
+            width: 60px; /* Increased size for profile pictures */
+            height: 60px; /* Increased size for profile pictures */
             border-radius: 50%;
             background-color: #63b3ed; /* Default avatar background */
             display: flex;
@@ -427,7 +410,15 @@
             color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             flex-shrink: 0; /* Prevent shrinking */
+            overflow: hidden; /* Ensure image is clipped to circle */
         }
+
+        .player-info .avatar img, .opponent-info .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure image fills the circular frame */
+        }
+
         .opponent-info .avatar {
             background-color: #e53e3e; /* Red for opponent */
         }
@@ -453,8 +444,8 @@
 
         /* New styles for deck and discard pile visuals */
         .deck-visual, .discard-visual {
-            width: 100px; /* Smaller visual card */
-            height: 140px;
+            width: 120px; /* Slightly larger visual card */
+            height: 160px;
             margin-bottom: 0.5rem;
             background-image: linear-gradient(135deg, #5a67d8, #4299e1); /* Blue gradient for deck */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 
@@ -526,13 +517,13 @@
                 gap: 1rem;
             }
             .card-container {
-                width: 130px;
-                height: 180px;
+                width: 140px; /* Adjusted for mobile */
+                height: 200px; /* Adjusted for mobile */
                 padding: 0.4rem;
             }
             .facedown-card {
-                width: 130px;
-                height: 180px;
+                width: 140px;
+                height: 200px;
             }
             .card-header {
                 font-size: 0.75rem;
@@ -546,7 +537,7 @@
             }
             .player-hand, .opponent-hand {
                 gap: 0.75rem;
-                min-height: 190px;
+                min-height: 220px; /* Adjusted for larger mobile cards */
             }
             .turn-button {
                 padding: 0.6rem 1.2rem;
@@ -558,8 +549,8 @@
                 padding: 1.5rem;
             }
             .player-info .avatar, .opponent-info .avatar {
-                width: 30px;
-                height: 30px;
+                width: 40px; /* Adjusted for mobile */
+                height: 40px; /* Adjusted for mobile */
                 font-size: 1.2rem;
             }
             h1 {
@@ -572,8 +563,8 @@
                 font-size: 0.7rem;
             }
             .deck-visual, .discard-visual {
-                width: 80px;
-                height: 110px;
+                width: 90px; /* Adjusted for mobile */
+                height: 120px; /* Adjusted for mobile */
             }
             .deck-visual::before, .discard-visual::before {
                 font-size: 0.7rem;
@@ -598,7 +589,10 @@
             </svg>
             
             <div class="opponent-info">
-                <div class="avatar">T</div>
+                <!-- Opponent profile picture -->
+                <div class="avatar">
+                    <img src="dictator.jpeg" alt="Dictator Profile Picture" onerror="this.onerror=null;this.src='https://placehold.co/60x60/e53e3e/ffffff?text=D';">
+                </div>
                 <h2 id="opponentName" class="text-2xl font-semibold text-red-400">Opponent: Trujillo</h2>
             </div>
             <div class="flex items-center gap-4 mb-2">
@@ -620,7 +614,10 @@
             </svg>
 
             <div class="player-info">
-                <div class="avatar">B</div>
+                <!-- Player profile picture -->
+                <div class="avatar">
+                    <img src="butterfly.jpeg" alt="Butterfly Profile Picture" onerror="this.onerror=null;this.src='https://placehold.co/60x60/63b3ed/ffffff?text=B';">
+                </div>
                 <h2 class="text-2xl font-semibold text-blue-400">Player: You (The Butterflies)</h2>
             </div>
             <div class="flex items-center gap-4 mb-2">
@@ -671,6 +668,12 @@
         <button id="messageBoxButton"></button>
     </div>
 
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="main-theme.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
         // --- Game Constants ---
         const MAX_SUPPLIES = 100;
@@ -714,6 +717,8 @@
         const playerDiscardCountElement = document.getElementById('playerDiscardCount');
         const playerDeckVisualElement = document.getElementById('playerDeckVisual');
         const playerDiscardVisualElement = document.getElementById('playerDiscardVisual');
+
+        const backgroundMusic = document.getElementById('backgroundMusic');
 
 
         // --- Game State Variables ---
@@ -882,6 +887,9 @@
 
             document.getElementById('startScreen').classList.add('hidden');
             gameScreen.classList.remove('hidden');
+
+            // Play background music
+            backgroundMusic.play().catch(e => console.log("Music play failed:", e));
 
             startTurn();
         }
@@ -1062,12 +1070,13 @@
             cardImage.alt = card.name;
             cardImage.className = 'card-image';
             
-            cardElement.innerHTML = `
-                <div class="card-header"></div>
-                <div class="card-art"></div>
-                <div class="card-body"></div>
-                <div class="card-footer"></div>
-            `;
+            // The existing `innerHTML` for card parts is removed to ensure the image fully fills the card.
+            // cardElement.innerHTML = `
+            //     <div class="card-header"></div>
+            //     <div class="card-art"></div>
+            //     <div class="card-body"></div>
+            //     <div class="card-footer"></div>
+            // `;
             cardElement.appendChild(cardImage);
 
 
@@ -1113,11 +1122,8 @@
                 opponentName.textContent = `Opponent: Trujillo (Strength: ${Math.floor(opponent.suspicion)})`;
 
                 opponentHandElement.innerHTML = '';
-                for (let i = 0; i < opponent.hand.length; i++) {
-                    const facedownCard = document.createElement('div');
-                    facedownCard.className = 'facedown-card';
-                    opponentHandElement.appendChild(facedownCard);
-                }
+                // Render opponent cards visible
+                opponent.hand.forEach((card, index) => opponentHandElement.appendChild(renderCard(card, false, index)));
             }
             
             checkGameOver();
@@ -1136,6 +1142,8 @@
             };
             messageBox.classList.remove('hidden');
             gameScreen.classList.add('hidden');
+            // Pause music when message box is shown
+            backgroundMusic.pause();
         }
 
         function checkGameOver() {
@@ -1160,7 +1168,7 @@
         }
 
         // --- Event Listeners ---
-        document.getElementById('startButton').addEventListener('click', startGame);
+        startButton.addEventListener('click', startGame);
         playCardButton.addEventListener('click', playSelectedCard);
         endTurnButton.addEventListener('click', endTurn);
 
@@ -1178,3 +1186,4 @@
     </script>
 </body>
 </html>
+
