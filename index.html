@@ -818,8 +818,8 @@
                 this.deck = [...allCards.filter(card => card.id.includes(`_${this.cardType}`))];
                 this.shuffleDeck();
             }
-            
-chooseCard(playerChar) {
+
+            chooseCard(playerChar) {
                 let bestCard = null;
                 let bestScore = -Infinity;
                 const playableCards = this.hand;
@@ -836,17 +836,13 @@ chooseCard(playerChar) {
                     score += playerSuppliesDecrease;
                     score += opponentStrengthIncrease * 1.5;
 
-                    if (playerChar.suspicion > MAX_PLAYER_SUSPICION * 0.7) {
+                    if (playerChar.suspicion > MAX_PLAYER_SUSPICION * 0.7) { 
                         score += playerSuspicionIncrease * 3;
                     }
 
-                    if (this.suspicion < MAX_REGIME_STRENGTH * 0.3) {
+                    if (this.suspicion < MAX_REGIME_STRENGTH * 0.3) { 
                         score += opponentStrengthIncrease * 3;
                     }
-
-                    // HIGHLIGHT START
-                    score += (Math.random() * 5) - 2.5; // Adds a random value between -2.5 and +2.5 to the score
-                    // HIGHLIGHT END
 
                     if (score > bestScore) {
                         bestScore = score;
@@ -861,6 +857,7 @@ chooseCard(playerChar) {
                 }
                 return bestCard;
             }
+        }
 
         // --- Game Flow Functions ---
         function startGame() {
@@ -1170,3 +1167,4 @@ chooseCard(playerChar) {
     </script>
 </body>
 </html>
+
