@@ -720,7 +720,7 @@
         let player = null;
         let opponent = null;
 
-        // --- Card Data ---
+     // --- Card Data ---
         // IMPORTANT: Ensure these 'art' filenames EXACTLY match your files on GitHub (including capitalization).
         const allCards = [
             // Player Cards
@@ -728,8 +728,8 @@
             { id: 'p02', name: 'Strategic Silence', cost: 8, effects: [{ target: 'opponent', stat: 'strength', value: -15 }, { target: 'player', stat: 'supplies', value: -5 }], art: 'Strategicsilence.png' },
             { id: 'p03', name: 'Observe', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 20 }], art: 'Observe.png' },
             { id: 'p04', name: 'Half-Truth', cost: 12, effects: [{ target: 'player', stat: 'suspicion', value: -15 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'Halftruth.png' },
-            { id: 'p05', name: 'Calculated Deception', cost: 15, effects: [{ target: 'opponent', stat: 'strength', value: -25 }, { target: 'player', stat: 'supplies', value: -10 }], art: 'calculateddeception.png' },
-            { id: 'p06', name: 'Hidden Resource', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 35 }], art: 'Hiddenresources.png' },
+            { id: 'p05', name: 'Calculated Deception', cost: 15, effects: [{ target: 'opponent', stat: 'strength', value: -25 }], art: 'calculateddeception.png' },
+            { id: 'p06', name: 'Hidden Resources', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 35 }], art: 'Hiddenresources.png' },
             { id: 'p07', name: 'Confession', cost: 10, effects: [{ target: 'player', stat: 'suspicion', value: -25 }, { target: 'player', stat: 'supplies', value: -10 }], art: 'confession.png' },
             { id: 'p08', name: 'Provoke Response', cost: 18, effects: [{ target: 'opponent', stat: 'strength', value: -15 }], art: 'provokeresponse.png' },
             { id: 'p09', name: 'Plausible Deniability', cost: 10, effects: [{ target: 'opponent', stat: 'strength', value: -10 }], art: 'plausibledeniability.png' },
@@ -746,13 +746,12 @@
             { id: 'e01_police', name: 'Interrogate', effects: [{ target: 'player', stat: 'suspicion', value: 15 }], art: 'Interrogate.png' },
             { id: 'e02_police', name: 'Scrutinize', effects: [{ target: 'player', stat: 'suspicion', value: 10 }], art: 'scrutinize.png' },
             { id: 'e03_police', name: 'Demand Info', effects: [{ target: 'player', stat: 'suspicion', value: 10 }], art: 'demandinfo.png' },
-            { id: 'e04_police', name: 'Gather Evidence', effects: [{ target: 'opponent', stat: 'supplies', value: 20 }], art: 'gatherevidence.png' },
+            { id: 'e04_police', name: 'Gather Evidence', effects: [{ target: 'opponent', stat: 'supplies', value: 5 }], art: 'gatherevidence.png' },
             { id: 'e05_police', name: 'False Lead', effects: [{ target: 'opponent', stat: 'strength', value: 10 }], art: 'falselead.png' },
             { id: 'e06_police', name: 'Secret Police Raid', effects: [{ target: 'player', stat: 'suspicion', value: 25 }], art: 'secretpoliceraid.png' },
             { id: 'e07_police', name: 'Propaganda Broadcast', effects: [{ target: 'player', stat: 'suspicion', value: 15 }, { target: 'opponent', stat: 'strength', value: 10 }], art: 'propagandabroadcast.png' },
             { id: 'e08_police', name: 'Surveillance Net', effects: [{ target: 'player', stat: 'supplies', value: -10 }], art: 'surveillancenet.png' },
         ];
-
 
         // --- Player and Opponent Data Structures ---
         class Character {
