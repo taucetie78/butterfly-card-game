@@ -50,7 +50,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem; /* Maintain some padding to show border/background slightly */
+            padding: 0.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out, opacity 0.3s ease-out;
@@ -85,7 +85,7 @@
         .card-container .card-art,
         .card-container .card-body,
         .card-container .card-footer {
-            display: none; /* Hide the old text elements, as images now fill the card */
+            display: none; /* Hide the old text elements */
         }
         /* -- END IMAGE CARD STYLES -- */
 
@@ -139,18 +139,6 @@
             animation: cardDrawFadeIn 0.5s ease-out forwards;
             animation-delay: var(--card-delay, 0s); /* Use CSS variable for staggered delay */
         }
-
-        /* New animation for opponent cards being drawn */
-        @keyframes opponentCardDraw {
-            from { opacity: 0; transform: translateY(-20px) scale(0.8); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .opponent-card-draw-animation {
-            animation: opponentCardDraw 0.5s ease-out forwards;
-            animation-delay: var(--card-delay, 0s); /* Use CSS variable for staggered delay */
-        }
-
 
         /* Opponent card styling */
         .card-container.opponent-card {
@@ -324,7 +312,7 @@
         }
 
         .turn-button:active:not(:disabled) {
-            transform: translateY(0px) scale(0.98);
+            transform: translateY(0px) scale(0.98); /* Press down effect */
             box-shadow: 0 3px 6px rgba(0,0,0,0.2);
         }
 
@@ -686,7 +674,7 @@
         const MAX_HAND_SIZE = 7;
         const DRAW_PER_TURN = 1;
         
-        // This now points to your specific GitHub repository.
+        // UPDATED: This now points to your specific GitHub repository.
         const IMAGE_BASE_URL = "https://raw.githubusercontent.com/taucetie78/butterfly-card-game/main/";
 
 
@@ -735,37 +723,36 @@
         let opponent = null;
 
         // --- Card Data ---
-        // The 'art' property now matches your exact PNG/JPG filenames.
+        // UPDATED: The 'art' property now matches your exact PNG filenames.
         const allCards = [
             // Player Cards
-            { id: 'p01', name: 'Minor Truth', cost: 5, effects: [{ target: 'player', stat: 'suspicion', value: -10 }], art: 'minortruth.jpg' },
-            { id: 'p02', name: 'Strategic Silence', cost: 8, effects: [{ target: 'opponent', stat: 'strength', value: -15 }, { target: 'player', stat: 'supplies', value: -5 }], art: 'Strategicsilence.jpg' },
-            { id: 'p03', name: 'Observe', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 20 }], art: 'Observe.jpg' },
-            { id: 'p04', name: 'Half-Truth', cost: 12, effects: [{ target: 'player', stat: 'suspicion', value: -15 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'Halftruth.jpg' },
-            { id: 'p05', name: 'Calculated Deception', cost: 15, effects: [{ target: 'opponent', stat: 'strength', value: -25 }, { target: 'player', stat: 'supplies', value: -10 }], art: 'calculateddeception.jpg' },
-            { id: 'p06', name: 'Hidden Resource', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 35 }], art: 'Hiddenresources.jpg' },
-            { id: 'p07', name: 'Confession', cost: 10, effects: [{ target: 'player', stat: 'suspicion', value: -25 }, { target: 'player', stat: 'supplies', value: -10 }], art: 'confession.jpg' },
-            { id: 'p08', name: 'Provoke Response', cost: 18, effects: [{ target: 'opponent', stat: 'strength', value: -20 }], art: 'provokeresponse.jpg' },
-            { id: 'p09', name: 'Plausible Deniability', cost: 10, effects: [{ target: 'opponent', stat: 'strength', value: -10 }], art: 'plausibledeniability.jpg' },
-            { id: 'p10', name: 'Diversion', cost: 7, effects: [{ target: 'opponent', stat: 'strength', value: -10 }], art: 'diversion.jpg' },
-            { id: 'p11', name: 'True Revelation', cost: 20, effects: [{ target: 'player', stat: 'suspicion', value: -30 }], art: 'truerevelation.jpg' },
-            { id: 'p12', name: 'Strategic Delay', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 15 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'strategicdelay.jpg' },
-            { id: 'p13', name: 'Sisterhood Bond', cost: 10, effects: [{ target: 'player', stat: 'suspicion', value: -15 }, { target: 'player', stat: 'supplies', value: 10 }], art: 'sisterhoodbond.jpg' },
-            { id: 'p14', name: 'Underground Press', cost: 5, effects: [{ target: 'player', stat: 'supplies', value: 25 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'undergroundpress.jpg' },
-            { id: 'p15', name: 'Act of Defiance', cost: 20, effects: [{ target: 'opponent', stat: 'strength', value: -30 }, { target: 'player', stat: 'suspicion', value: 10 }], art: 'actofdefiance.jpg' },
-            { id: 'p16', name: 'Secret Meeting', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: -15 }], drawExtra: 1, art: 'secretmeeting.jpg' },
-            { id: 'p18', name: 'The Fourth Butterfly', cost: 25, effects: [{ target: 'player', stat: 'suspicion', value: -50 }, { target: 'player', stat: 'supplies', value: -25 }], art: 'thefourthbutterfly.jpg' },
-            { id: 'p19', name: 'Whispered Word', cost: 7, effects: [{ target: 'player', stat: 'suspicion', value: -10 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'whisperedword.jpg' },
-
+            { id: 'p01', name: 'Minor Truth', cost: 5, effects: [{ target: 'player', stat: 'suspicion', value: -10 }], art: 'minortruth.png' },
+            { id: 'p02', name: 'Strategic Silence', cost: 8, effects: [{ target: 'opponent', stat: 'strength', value: -15 }, { target: 'player', stat: 'supplies', value: -5 }], art: 'Strategicsilence.png' },
+            { id: 'p03', name: 'Observe', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 20 }], art: 'Observe.png' },
+            { id: 'p04', name: 'Half-Truth', cost: 12, effects: [{ target: 'player', stat: 'suspicion', value: -15 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'Halftruth.png' },
+            { id: 'p05', name: 'Calculated Deception', cost: 15, effects: [{ target: 'opponent', stat: 'strength', value: -25 }, { target: 'player', stat: 'supplies', value: -10 }], art: 'calculateddeception.png' },
+            { id: 'p06', name: 'Hidden Resource', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 35 }], art: 'Hiddenresources.png' },
+            { id: 'p07', name: 'Confession', cost: 10, effects: [{ target: 'player', stat: 'suspicion', value: -25 }, { target: 'player', stat: 'supplies', value: -10 }], art: 'confession.png' },
+            { id: 'p08', name: 'Provoke Response', cost: 18, effects: [{ target: 'opponent', stat: 'strength', value: -20 }], art: 'provokeresponse.png' },
+            { id: 'p09', name: 'Plausible Deniability', cost: 10, effects: [{ target: 'opponent', stat: 'strength', value: -10 }], art: 'plausibledeniability.png' },
+            { id: 'p10', name: 'Diversion', cost: 7, effects: [{ target: 'opponent', stat: 'strength', value: -10 }], art: 'diversion.png' },
+            { id: 'p11', name: 'True Revelation', cost: 20, effects: [{ target: 'player', stat: 'suspicion', value: -30 }], art: 'truerevelation.png' },
+            { id: 'p12', name: 'Strategic Delay', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: 15 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'strategicdelay.png' },
+            { id: 'p13', name: 'Sisterhood Bond', cost: 10, effects: [{ target: 'player', stat: 'suspicion', value: -15 }, { target: 'player', stat: 'supplies', value: 10 }], art: 'sisterhoodbond.png' },
+            { id: 'p14', name: 'Underground Press', cost: 5, effects: [{ target: 'player', stat: 'supplies', value: 25 }, { target: 'opponent', stat: 'strength', value: -5 }], art: 'undergroundpress.png' },
+            { id: 'p15', name: 'Act of Defiance', cost: 20, effects: [{ target: 'opponent', stat: 'strength', value: -30 }, { target: 'player', stat: 'suspicion', value: 10 }], art: 'actofdefiance.png' },
+            { id: 'p16', name: 'Secret Meeting', cost: 0, effects: [{ target: 'player', stat: 'supplies', value: -15 }], drawExtra: 1, art: 'secretmeeting.png' },
+            { id: 'p18', name: 'The Fourth Butterfly', cost: 25, effects: [{ target: 'player', stat: 'suspicion', value: -50 }, { target: 'player', stat: 'supplies', value: -25 }], art: 'thefourthbutterfly.png' },
+            
             // Opponent Cards
-            { id: 'e01_police', name: 'Interrogate', effects: [{ target: 'player', stat: 'suspicion', value: 15 }], art: 'Interrogate.jpg' },
-            { id: 'e02_police', name: 'Scrutinize', effects: [{ target: 'player', stat: 'suspicion', value: 10 }], art: 'scrutinize.jpg' },
-            { id: 'e03_police', name: 'Demand Info', effects: [{ target: 'player', stat: 'suspicion', value: 20 }], art: 'demandinfo.jpg' },
-            { id: 'e04_police', name: 'Gather Evidence', effects: [{ target: 'opponent', stat: 'supplies', value: 20 }], art: 'gatherevidence.jpg' },
-            { id: 'e05_police', name: 'False Lead', effects: [{ target: 'opponent', stat: 'strength', value: 10 }], art: 'falselead.jpg' },
-            { id: 'e06_police', name: 'Secret Police Raid', effects: [{ target: 'player', stat: 'suspicion', value: 25 }], art: 'secretpoliceraid.jpg' },
-            { id: 'e07_police', name: 'Propaganda Broadcast', effects: [{ target: 'player', stat: 'suspicion', value: 10 }, { target: 'opponent', stat: 'strength', value: 5 }], art: 'propagandabroadcast.jpg' },
-            { id: 'e08_police', name: 'Surveillance Net', effects: [{ target: 'player', stat: 'supplies', value: -10 }], art: 'surveillancenet.jpg' },
+            { id: 'e01_police', name: 'Interrogate', effects: [{ target: 'player', stat: 'suspicion', value: 15 }], art: 'Interrogate.png' },
+            { id: 'e02_police', name: 'Scrutinize', effects: [{ target: 'player', stat: 'suspicion', value: 10 }], art: 'scrutinize.png' },
+            { id: 'e03_police', name: 'Demand Info', effects: [{ target: 'player', stat: 'suspicion', value: 20 }], art: 'demandinfo.png' },
+            { id: 'e04_police', name: 'Gather Evidence', effects: [{ target: 'opponent', stat: 'supplies', value: 20 }], art: 'gatherevidence.png' },
+            { id: 'e05_police', name: 'False Lead', effects: [{ target: 'opponent', stat: 'strength', value: 10 }], art: 'falselead.png' },
+            { id: 'e06_police', name: 'Secret Police Raid', effects: [{ target: 'player', stat: 'suspicion', value: 25 }], art: 'secretpoliceraid.png' },
+            { id: 'e07_police', name: 'Propaganda Broadcast', effects: [{ target: 'player', stat: 'suspicion', value: 10 }, { target: 'opponent', stat: 'strength', value: 5 }], art: 'propagandabroadcast.png' },
+            { id: 'e08_police', name: 'Surveillance Net', effects: [{ target: 'player', stat: 'supplies', value: -10 }], art: 'surveillancenet.png' },
         ];
 
 
@@ -1068,10 +1055,6 @@
             if (isPlayerCard) {
                 cardElement.classList.add('card-draw-animation');
                 cardElement.style.setProperty('--card-delay', `${index * 0.1}s`);
-            } else {
-                // Apply opponent draw animation for newly rendered opponent cards
-                cardElement.classList.add('opponent-card-draw-animation');
-                cardElement.style.setProperty('--card-delay', `${index * 0.1}s`);
             }
             
             const cardImage = document.createElement('img');
@@ -1124,7 +1107,7 @@
                 opponentName.textContent = `Opponent: Trujillo (Strength: ${Math.floor(opponent.suspicion)})`;
 
                 opponentHandElement.innerHTML = '';
-                // Render opponent cards visible with draw animation
+                // Render opponent cards visible
                 opponent.hand.forEach((card, index) => opponentHandElement.appendChild(renderCard(card, false, index)));
             }
             
